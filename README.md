@@ -5,7 +5,7 @@ v(F).(FU).(C).(CU)\
 F = Feature\
 &emsp;F = 1 = Preparation\
 FU = Feature Update (current version of feature)\
-&emsp;v1.0 = Preparation\
+&emsp;v1.1 = Preparation\
 C = Component\
 &emsp;v1.(FU).1 = index.js (outermost)\
 &emsp;v1.(FU).2 = index.js (routes folder)\
