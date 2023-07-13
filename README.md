@@ -1,10 +1,10 @@
 # mata-angin-blog-back-end
 
 • Versioning Code:
-v(F).(FU).(C).(CU)
+v(F).(FU).(C).(CU)\
 F = Feature
   F = 1 = Preparation\
-FU = Feature Update (current version of feature)\
+FU = Feature Update (current version of feature)
   v1.0 = Preparation\
 C = Component
   v1.(FU).1 = index.js (outermost)\
