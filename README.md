@@ -4,6 +4,9 @@
 v(F).(FU).(C).(CU)\
 F = Feature\
 &emsp;F = 1 = Preparation\
+&emsp;F = 2 = Routes\
+&emsp;F = 3 = Controller\
+&emsp;F = 4 = Model\
 FU = Feature Update (current version of feature)\
 &emsp;v1.1 = Preparation\
 C = Component\
