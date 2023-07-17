@@ -8,7 +8,7 @@ F = Feature\
 &emsp;F = 3 = Controller\
 &emsp;F = 4 = Model\
 FU = Feature Update (current version of feature)\
-&emsp;v1.5 = Preparation\
+&emsp;v1.6 = Preparation\
 &emsp;v2.1 = Routes\
 &emsp;v3.1 = Controller\
 C = Component\
