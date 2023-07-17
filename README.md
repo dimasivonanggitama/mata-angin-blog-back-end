@@ -6,7 +6,8 @@ F = Feature\
 &emsp;F = 1 = Preparation\
 &emsp;F = 2 = Routes\
 &emsp;F = 3 = Controller\
-&emsp;F = 4 = Model\
+&emsp;F = 4 = Migration\
+&emsp;F = 5 = Model\
 FU = Feature Update (current version of feature)\
 &emsp;v1.6 = Preparation\
 &emsp;v2.1 = Routes\
