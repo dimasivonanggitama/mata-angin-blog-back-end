@@ -25,3 +25,18 @@ CU = Component Update\
 • Alur sistem:\
 index.js (paling luar) -> routes -> controllers -> models
 
+• Dependency installation
+1. npm init --y
+2. npm install --save-dev sequelize-cli
+3. npm install sequelize
+4. npm install mysql2
+5. npx sequelize-cli init
+6. tambahkan .env
+7. npm install dotenv
+8. npm install bcrypt
+9. npm install jsonwebtoken
+
+• Create table using migrate:
+npx sequelize-cli db:migrate
+npx sequelize db:migrate
+
