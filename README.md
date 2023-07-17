@@ -36,7 +36,13 @@ index.js (paling luar) -> routes -> controllers -> models
 8. npm install bcrypt
 9. npm install jsonwebtoken
 
-• Create table using migrate:
+
+• ORM: Sequelize
+1. Create migration file
+npx sequelize-cli migration:generate --name create-user-table
+npx sequelize-cli migration:generate --name create-blog-table
+
+2. Execute create table from migration file:
 npx sequelize-cli db:migrate
 npx sequelize db:migrate
 
