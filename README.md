@@ -11,9 +11,10 @@ FU = Feature Update (current version of feature)\
 &emsp;v1.1 = Preparation\
 C = Component\
 &emsp;v1.(FU).1 = index.js (outermost)\
-&emsp;v1.(FU).2 = index.js (routes folder)\
-&emsp;v1.(FU).3 = index.js (controllers folder)\
-&emsp;v1.(FU).4 = index.js (models folder)\
+&emsp;v2.(FU).1 = index.js (routes folder)\
+&emsp;v3.(FU).1 = index.js (controllers folder)\
+&emsp;v3.(FU).2 = authController\
+&emsp;v4.(FU).1 = index.js (models folder)\
 CU = Component Update\
 
 • Alur sistem:\
