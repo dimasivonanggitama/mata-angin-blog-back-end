@@ -21,6 +21,7 @@ C = Component\
 &emsp;v3.(FU).1 = index.js (controllers folder)\
 &emsp;v3.(FU).2 = authController\
 &emsp;v4.(FU).1 = Create User Table\
+&emsp;v5.(FU).1 = index.js (models folder)\
 CU = Component Update\
 
 • Alur sistem:\
