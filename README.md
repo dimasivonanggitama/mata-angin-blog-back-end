@@ -8,7 +8,8 @@ F = Feature\
 &emsp;F = 3 = Controller\
 &emsp;F = 4 = Model\
 FU = Feature Update (current version of feature)\
-&emsp;v1.1 = Preparation\
+&emsp;v1.3 = Preparation\
+&emsp;v3.1 = Controller\
 C = Component\
 &emsp;v1.(FU).1 = .env\
 &emsp;v1.(FU).2 = .gitignore\
