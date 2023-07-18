@@ -8,6 +8,7 @@ F = Feature\
 &emsp;F = 3 = Controller\
 &emsp;F = 4 = Migration\
 &emsp;F = 5 = Model\
+&emsp;F = 6 = Middleware\
 FU = Feature Update (current version of feature)\
 &emsp;v1.6 = Preparation\
 &emsp;v2.1 = Routes\
