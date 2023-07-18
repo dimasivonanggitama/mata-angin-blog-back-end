@@ -16,6 +16,7 @@ C = Component\
 &emsp;v1.(FU).1 = .env\
 &emsp;v1.(FU).2 = .gitignore\
 &emsp;v1.(FU).3 = index.js (outermost)\
+&emsp;v1.(FU).4 = Config\
 &emsp;v2.(FU).1 = index.js (routes folder)\
 &emsp;v2.(FU).2 = Auth Routes\
 &emsp;v3.(FU).1 = index.js (controllers folder)\
