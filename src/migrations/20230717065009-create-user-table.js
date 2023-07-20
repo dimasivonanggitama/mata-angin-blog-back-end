@@ -30,7 +30,7 @@ module.exports = {
       },
       phone: {
         allowNull: false,
-        type: Sequelize.NUMBER
+        type: Sequelize.BIGINT
       },
       avatar: {
         allowNull: false,
