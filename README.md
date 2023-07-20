@@ -13,6 +13,7 @@ FU = Feature Update (current version of feature)\
 &emsp;v1.6 = Preparation\
 &emsp;v2.1 = Routes\
 &emsp;v3.1 = Controller\
+&emsp;v5.1 = Model\
 C = Component\
 &emsp;v1.(FU).1 = .env\
 &emsp;v1.(FU).2 = .gitignore\
