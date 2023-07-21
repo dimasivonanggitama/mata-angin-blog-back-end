@@ -29,9 +29,13 @@ app.use("/api/auth", authRoutes);                         // [POST] Register Acc
 // app.use("/api/blog/log", authRoutes);
 // app.use("/api/blog/like", authRoutes);
 // app.use("/api/blog/pagLike", authRoutes);
-// app.use("/api/blog/pagFav", authRoutes);
+// app.use("/api/blog /pagFav", authRoutes);
 // app.use("/api/blog/pagFav", authRoutes);
 // app.use("/Public/Blog-1683581987195226008.png", authRoutes);
 // app.use("/Public/Avatar-6.png", authRoutes);
 
 //this comment added for requirement of git changes tracker file
+
+app.listen(port, function () {
+  console.log(`server is running on localhost ${port}`)
+})
