@@ -30,7 +30,7 @@ C = Component\
 &emsp;v6.(FU).1 = index.js (middleware folder)\
 &emsp;v6.(FU).2 = Auth: Input Verificator\
 &emsp;v6.(FU).3 = Auth: DB Verificator\
-&emsp;v6.(FU).3 = Auth: Token Verificator\
+&emsp;v6.(FU).4 = Auth: Token Verificator\
 CU = Component Update\
 
 • Alur sistem:\
