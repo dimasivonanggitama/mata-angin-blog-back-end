@@ -26,6 +26,7 @@ C = Component\
 &emsp;v4.(FU).1 = Create User Table\
 &emsp;v5.(FU).1 = index.js (models folder)\
 &emsp;v5.(FU).2 = User Model\
+&emsp;v6.(FU).1 = index.js (middleware folder)\
 CU = Component Update\
 
 • Alur sistem:\
