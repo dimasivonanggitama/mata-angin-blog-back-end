@@ -41,6 +41,7 @@ index.js (paling luar) -> routes -> controllers -> models
 7. npm install dotenv
 8. npm install bcrypt
 9. npm install jsonwebtoken
+10. npm install nodemailler
 
 
 • ORM: Sequelize
