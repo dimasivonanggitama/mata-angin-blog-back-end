@@ -28,7 +28,7 @@ C = Component\
 &emsp;v5.(FU).1 = index.js (models folder)\
 &emsp;v5.(FU).2 = User Model\
 &emsp;v6.(FU).1 = index.js (middleware folder)\
-&emsp;v6.(FU).2 = Auth Middleware\
+&emsp;v6.(FU).2 = Auth: Input Verificator\
 CU = Component Update\
 
 • Alur sistem:\
