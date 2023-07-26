@@ -7,7 +7,7 @@ const emailValidator = (req, res, next) => {
     return next();
 };
 
-const usernameValidator = () => {
+const usernameValidator = (req, res, next) => {
     const { username } = req.body;
     if (username.isEmpty()) return res.status(422).send("Username tidak boleh kosong!");
 
@@ -21,11 +21,11 @@ const usernameValidator = () => {
     return next();
 }
 
-const passwordValidator = () => {
+const passwordValidator = (req, res, next) => {
     return next();
 }
 
-const phoneValidator = () => {
+const phoneValidator = (req, res, next) => {
     return next();
 }
 
