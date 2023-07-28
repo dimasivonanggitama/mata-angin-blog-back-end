@@ -85,8 +85,8 @@ const phoneValidator = (req, res, next) => {
     if (phone.length < 10 && phone.length > 13) return res.status(422).send("Nomor ponsel harus antara 10-13 digit!");
 
     const numericPattern = /[0-9]/;
-    for (let i = 0; i < password.length; i++) {
-        result = numericPattern.test(password[i]);
+    for (let i = 0; i < phone.length; i++) {
+        result = numericPattern.test(phone[i]);
         if (result === false) return res.status(422).send("Nomor ponsel yang diperbolehkan hanya angka!");
     }
 
