@@ -82,7 +82,7 @@ const phoneValidator = (req, res, next) => {
     let result = false;
     let { phone } = req.body;
     if (phone == false) return res.status(422).send("Nomor ponsel tidak boleh kosong!");
-    if (phone.length < 10 && phone.length > 13) return res.status(422).send("Nomor ponsel harus antara 10-13 digit!");
+    if (phone.length < 10 || phone.length > 13) return res.status(422).send("Nomor ponsel harus antara 10-13 digit!");
 
     const numericPattern = /[0-9]/;
     for (let i = 0; i < phone.length; i++) {
@@ -90,8 +90,7 @@ const phoneValidator = (req, res, next) => {
         if (result === false) return res.status(422).send("Nomor ponsel yang diperbolehkan hanya angka!");
     }
 
-    if (`${phone[0]}${phone[1]}` === '08') return res.status(422).send("Nomor ponsel harus diawali dengan '08'!");
-
+    if (`${phone[0]}${phone[1]}` !== '08') return res.status(422).send("Nomor ponsel harus diawali dengan '08'!");
     return next();
 }
 
