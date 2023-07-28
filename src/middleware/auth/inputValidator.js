@@ -38,7 +38,6 @@ const usernameValidator = (req, res, next) => {
     let result = false;
     let { username } = req.body;
     if (username == false) return res.status(422).send("Username tidak boleh kosong!");
-    // if (username == false) res.status(422).send("Username tidak boleh kosong!");
 
     username = username.toLowerCase();
     const pattern = /[a-z0-9._]/;
@@ -50,6 +49,31 @@ const usernameValidator = (req, res, next) => {
 }
 
 const passwordValidator = (req, res, next) => {
+    let result = false;
+    let { password } = req.body;
+    if (password == false) return res.status(422).send("Password tidak boleh kosong!");
+
+    const capitalizePattern = /[A-Z]/;
+    for (let i = 0; i < password.length; i++) {
+        result = capitalizePattern.test(password[i]);
+        if (result) break;
+        else return res.status(422).send("Password setidaknya terdapat huruf kapital!");
+    }
+
+    const numericPattern = /[0-9]/;
+    for (let i = 0; i < password.length; i++) {
+        result = numericPattern.test(password[i]);
+        if (result) break;
+        else return res.status(422).send("Password setidaknya terdapat angka!");
+    }
+    
+    const specialCharPattern = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+    for (let i = 0; i < password.length; i++) {
+        result = specialCharPattern.test(password[i]);
+        if (result) break;
+        else return res.status(422).send("Password setidaknya terdapat karakter spesial/unik!");
+    }
+
     return next();
 }
 
