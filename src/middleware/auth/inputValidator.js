@@ -90,6 +90,8 @@ const phoneValidator = (req, res, next) => {
         if (result === false) return res.status(422).send("Nomor ponsel yang diperbolehkan hanya angka!");
     }
 
+    if (`${phone[0]}${phone[1]}` === '08') return res.status(422).send("Nomor ponsel harus diawali dengan '08'!");
+
     return next();
 }
 
