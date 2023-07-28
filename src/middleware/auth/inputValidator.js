@@ -52,27 +52,28 @@ const passwordValidator = (req, res, next) => {
     let result = false;
     let { password } = req.body;
     if (password == false) return res.status(422).send("Password tidak boleh kosong!");
+    if (password.length < 6) return res.status(422).send("Password setidaknya minimal 6 karakter!");
 
     const capitalizePattern = /[A-Z]/;
     for (let i = 0; i < password.length; i++) {
         result = capitalizePattern.test(password[i]);
         if (result) break;
-        else return res.status(422).send("Password setidaknya terdapat huruf kapital!");
     }
-
+    if (result === false) return res.status(422).send("Password setidaknya terdapat huruf kapital!");
+    
     const numericPattern = /[0-9]/;
     for (let i = 0; i < password.length; i++) {
         result = numericPattern.test(password[i]);
         if (result) break;
-        else return res.status(422).send("Password setidaknya terdapat angka!");
     }
+    if (result === false) return res.status(422).send("Password setidaknya terdapat angka!");
     
     const specialCharPattern = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
     for (let i = 0; i < password.length; i++) {
         result = specialCharPattern.test(password[i]);
         if (result) break;
-        else return res.status(422).send("Password setidaknya terdapat karakter spesial/unik!");
     }
+    if (result === false) return res.status(422).send("Password setidaknya terdapat karakter spesial/unik!");
 
     return next();
 }
@@ -81,4 +82,4 @@ const phoneValidator = (req, res, next) => {
     return next();
 }
 
-module.exports = { usernameValidator, emailValidator };
+module.exports = { usernameValidator, emailValidator, passwordValidator };
