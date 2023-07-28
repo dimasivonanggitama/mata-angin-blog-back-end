@@ -1,3 +1,3 @@
-const { usernameValidator, emailValidator } = require("./auth/inputValidator");
+const { usernameValidator, emailValidator, passwordValidator } = require("./auth/inputValidator");
 
-module.exports = { usernameValidator, emailValidator };
+module.exports = { usernameValidator, emailValidator, passwordValidator };
