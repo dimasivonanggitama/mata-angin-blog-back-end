@@ -15,7 +15,7 @@ const AuthController = {
             const hashedPassword = await bcrypt.hash(password, salt);
 
             await db.sequelize.transaction(async (t) => {
-                const result = await users.create({
+                const result = await user.create({
                     username,
                     email,
                     phone,
