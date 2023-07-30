@@ -43,7 +43,7 @@ const AuthController = {
                 });
 
                 return res.status(200).json({
-                    message: 'Register success. Please check your email to verify your account',
+                    message: 'Registrasi akun anda telah berhasil dilakukan. Silahkan periksa email anda untuk melakukan verifikasi akun.',
                     data: result,
                     token
                 });
