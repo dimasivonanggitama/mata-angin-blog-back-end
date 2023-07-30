@@ -10,7 +10,7 @@ F = Feature\
 &emsp;F = 5 = Model\
 &emsp;F = 6 = Middleware\
 FU = Feature Update (current version of feature)\
-&emsp;v1.8 = Preparation\
+&emsp;v1.9 = Preparation\
 &emsp;v2.1 = Routes\
 &emsp;v3.1 = Controller\
 &emsp;v5.1 = Model\
