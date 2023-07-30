@@ -1,11 +1,11 @@
-const db = require('../models');
-const users = db.user;
+const db = require('../../models');
+const users = db.User;
 
 const dbVerificator = async (req, res, next) => {
     const { email, username, phone } = req.body;
     try {
         const emailExist = await users.findOne({
-            where: { username: email },
+            where: { email: email },
         });
         if (emailExist) return res.status(409).json({ message: "Email sudah digunakan sebelumnya" });
 
@@ -15,7 +15,7 @@ const dbVerificator = async (req, res, next) => {
         if (usernameExist) return res.status(409).json({ message: "Username sudah digunakan sebelumnya" });
         
         const phoneExist = await users.findOne({
-            where: { username: phone },
+            where: { phone: phone },
         });
         if (phoneExist) return res.status(409).json({ message: "Nomor telepon sudah digunakan sebelumnya" });
 
