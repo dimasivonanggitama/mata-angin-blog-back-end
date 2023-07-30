@@ -29,6 +29,7 @@ module.exports = (sequelize, Sequelize) => {
         isVerified: {
             type: Sequelize.BOOLEAN
         },
+    }, {
         updatedAt: false,
         timestamps: false,
     });
