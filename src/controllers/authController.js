@@ -1,51 +1,53 @@
 const bcrypt = require("bcrypt");
 const db = require("../models");
+const jwt = require('jsonwebtoken');
+const transporter = require('../helpers/transporter');
+const path = require('path');
+const fs = require('fs').promises;
+const handlebars = require('handlebars');
 const user = db.User;
 
 const AuthController = {
     register: async (req, res) => {
         try {
-            const { username, email, password } = req.body;
-            console.log("Kamu telah sampai di auth controller: register");
-            return res.status(200).send("Kamu telah sampai di auth controller: register");
+            const { username, email, password, phone } = req.body;
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
 
-            // const salt = await bcrypt.genSalt(10);
-            // const hashedPassword = await bcrypt.hash(password, salt);
+            await db.sequelize.transaction(async (t) => {
+                const result = await users.create({
+                    username,
+                    email,
+                    phone,
+                    password: hashedPassword,
+                    isVerified: false
+                }, { transaction: t });
 
-            // await db.sequelize.transaction(async (t) => {
-            //     const result = await users.create({
-            //         username,
-            //         email,
-            //         phone,
-            //         password: hashedPassword,
-            //         isVerified: false
-            //     }, { transaction: t });
+                let payload = { id: result.id, email: result.email };
 
-            //     let payload = { id: result.id, email: result.email };
+                const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '1h' });
 
-            //     const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '1h' });
+                const redirect = `http://localhost:3000/verification/${token}`;
 
-            //     const redirect = `http://localhost:3000/verification/${token}`;
+                const data = await fs.readFile(
+                    path.resolve(__dirname, "../email/verificationEmail.html"), 'utf-8'
+                );
 
-            //     const data = await fs.readFile(
-            //         path.resolve(__dirname, "../email/verificationEmail.html"), 'utf-8'
-            //     );
+                const tempCompile = handlebars.compile(data);
+                const tempResult = tempCompile({ username, redirect });
 
-            //     const tempCompile = handlebars.compile(data);
-            //     const tempResult = tempCompile({ username, redirect });
+                await transporter.sendMail({
+                    to: result.email,
+                    subject: "Verify Account",
+                    html: tempResult
+                });
 
-            //     await transporter.sendMail({
-            //         to: result.email,
-            //         subject: "Verify Account",
-            //         html: tempResult
-            //     });
-
-            //     return res.status(200).json({
-            //         message: 'Register success. Please check your email to verify your account',
-            //         data: result,
-            //         token
-            //     });
-            // });
+                return res.status(200).json({
+                    message: 'Register success. Please check your email to verify your account',
+                    data: result,
+                    token
+                });
+            });
         } catch (err) {
             return res.status(503).json({
                 message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
