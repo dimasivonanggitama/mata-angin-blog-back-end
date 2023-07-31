@@ -10,6 +10,7 @@ F = Feature\
 &emsp;F = 5 = Model\
 &emsp;F = 6 = Middleware\
 &emsp;F = 7 = Email Template\
+&emsp;F = 8 = Helpers\
 FU = Feature Update (current version of feature)\
 &emsp;v1.9 = Preparation\
 &emsp;v2.1 = Routes\
@@ -17,6 +18,7 @@ FU = Feature Update (current version of feature)\
 &emsp;v5.1 = Model\
 &emsp;v6.1 = Middleware\
 &emsp;v7.1 = Email Template\
+&emsp;v8.1 = Helpers\
 C = Component\
 &emsp;v1.(FU).1 = .env\
 &emsp;v1.(FU).2 = .gitignore\
@@ -39,6 +41,7 @@ C = Component\
 &emsp;v7.(FU).4 = Email Template: Change Password\
 &emsp;v7.(FU).5 = Email Template: Change Username\
 &emsp;v7.(FU).6 = Email Template: Change Phone\
+&emsp;v8.(FU).1 = Helpers: Email Transporter\
 CU = Component Update\
 
 • Alur sistem:\
