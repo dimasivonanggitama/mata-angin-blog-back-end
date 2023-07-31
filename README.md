@@ -26,6 +26,7 @@ C = Component\
 &emsp;v1.(FU).4 = Config\
 &emsp;v2.(FU).1 = index.js (routes folder)\
 &emsp;v2.(FU).2 = Auth Routes\
+&emsp;v2.(FU).3 = Blog Routes\
 &emsp;v3.(FU).1 = index.js (controllers folder)\
 &emsp;v3.(FU).2 = authController\
 &emsp;v4.(FU).1 = Create User Table\
