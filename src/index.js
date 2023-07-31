@@ -8,8 +8,9 @@ const db = require("./models");
 const express = require("express");
 const app = express();
 
-const { authRoutes } = require("./routes");
 // const { home } = require("./");
+const { authRoutes } = require("./routes");
+const { blogRoutes } = require("./routes");
 
 app.use(express.json());
 
@@ -23,6 +24,7 @@ app.use("/api/auth", authRoutes);                         // [POST] Register Acc
 // app.use("/api/auth/changeUsername", authRoutes);
 // app.use("/api/auth/changeEmail", authRoutes);
 // app.use("/api/profile/single-uploaded", authRoutes);
+app.use("/api/blog/", blogRoutes);                        // 
 // app.use("/api/blog/remove/:id", authRoutes);
 // app.use("/api/blog?id_cat=3&sort=ASC&page898", authRoutes);
 // app.use("/api/blog/allCategory", authRoutes);
