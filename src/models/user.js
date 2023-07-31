@@ -23,7 +23,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BIGINT
         },
         avatar: {
-            allowNull: false,
             type: Sequelize.STRING
         },
         isVerified: {
