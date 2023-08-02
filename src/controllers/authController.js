@@ -79,7 +79,28 @@ const AuthController = {
                 error: err.message
             });
         }
-    }
+    },
+    verifyEmail: async (req, res) => {
+        let token = req.headers.authorization;
+        try {
+            token = token.split(" ")[1];
+            const decoded = jwt.verify(token, process.env.JWT_KEY);
+
+            if (!decoded) return res.status(400).json({ message: 'Invalid token' });
+
+            await db.sequelize.transaction(async (t) => {
+                const updateUser = await users.update(
+                    { isVerified: true },
+                    { where: { id: decoded.id } }, { transaction: t }
+                );
+            })
+
+            return res.status(200).json({ message: 'Email is verified successfully' });
+
+        } catch (error) {
+            return res.status(500).json({ message: "Failed to verify your email", error: error.message });
+        }
+    },
 }
 // user.sync({alter: true})
 module.exports = AuthController;
