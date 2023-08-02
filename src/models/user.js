@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         phone: {
             allowNull: false,
-            type: Sequelize.BIGINT
+            type: Sequelize.STRING
         },
         avatar: {
             type: Sequelize.STRING
