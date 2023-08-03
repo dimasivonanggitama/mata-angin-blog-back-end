@@ -8,6 +8,43 @@ const handlebars = require('handlebars');
 const user = db.User;
 
 const AuthController = {
+    login: async (req, res) => {
+        try {
+            const { email, username, phone, password } = req.body;
+            let where = {};
+            if (email) { where.email = email; }
+            if (username) { where.username = username; }
+            if (phone) { where.phone = phone; }
+
+            const checkLogin = await users.findOne({ where });
+            if (!checkLogin.isVerified) return res.status(403).json({ message: "Untuk alasan keamanan, anda harus verifikasi email terlebih dahulu!" });
+
+            const passwordValid = await bcrypt.compare(password, checkLogin.password);
+            if (!passwordValid) return res.status(422).json({ message: "Password incorrect"});
+
+            let payload = {
+                id: checkLogin.id,
+                username: checkLogin.username,
+                email: checkLogin.email,
+                phone: checkLogin.phone,
+            }
+
+            const token = jwt.sign(
+                payload,
+                process.env.JWT_KEY, { expiresIn: '100h'}
+            )
+
+            return res.status(200).json({
+                message: "Login success",
+                data: token
+            })
+        } catch (err) {
+            return res.status(503).json({
+                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
+                error: err.message
+            });
+        }
+    },
     register: async (req, res) => {
         try {
             const { username, email, password, phone } = req.body;
@@ -55,41 +92,11 @@ const AuthController = {
             });
         }
     },
-    login: async (req, res) => {
+    resendToken: async (req, res) => {
         try {
-            const { email, username, phone, password } = req.body;
-            let where = {};
-            if (email) { where.email = email; }
-            if (username) { where.username = username; }
-            if (phone) { where.phone = phone; }
 
-            const checkLogin = await users.findOne({ where });
-            if (!checkLogin.isVerified) return res.status(403).json({ message: "Untuk alasan keamanan, anda harus verifikasi email terlebih dahulu!" });
-
-            const passwordValid = await bcrypt.compare(password, checkLogin.password);
-            if (!passwordValid) return res.status(422).json({ message: "Password incorrect"});
-
-            let payload = {
-                id: checkLogin.id,
-                username: checkLogin.username,
-                email: checkLogin.email,
-                phone: checkLogin.phone,
-            }
-
-            const token = jwt.sign(
-                payload,
-                process.env.JWT_KEY, { expiresIn: '100h'}
-            )
-
-            return res.status(200).json({
-                message: "Login success",
-                data: token
-            })
         } catch (err) {
-            return res.status(503).json({
-                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
-                error: err.message
-            });
+
         }
     },
     verifyEmail: async (req, res) => {
