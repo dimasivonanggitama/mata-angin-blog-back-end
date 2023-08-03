@@ -64,10 +64,10 @@ const AuthController = {
             if (phone) { where.phone = phone; }
 
             const checkLogin = await users.findOne({ where });
-            if (!checkLogin.isVerified) return res.status(404).json({ message: "Please verify your email" });
+            if (!checkLogin.isVerified) return res.status(403).json({ message: "Untuk alasan keamanan, anda harus verifikasi email terlebih dahulu!" });
 
             const passwordValid = await bcrypt.compare(password, checkLogin.password);
-            if (!passwordValid) return res.status(404).json({ message: "Password incorrect"});
+            if (!passwordValid) return res.status(422).json({ message: "Password incorrect"});
 
             let payload = {
                 id: checkLogin.id,
@@ -86,9 +86,9 @@ const AuthController = {
                 data: token
             })
         } catch (error) {
-            return res.status(500).json({
-              message: "Login failed",
-              error: error.message,
+            return res.status(503).json({
+                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
+                error: err.message
             });
         }
     },
@@ -110,7 +110,10 @@ const AuthController = {
             return res.status(200).json({ message: 'Email is verified successfully' });
 
         } catch (error) {
-            return res.status(500).json({ message: "Failed to verify your email", error: error.message });
+            return res.status(503).json({
+                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
+                error: err.message
+            });
         }
     },
 }
