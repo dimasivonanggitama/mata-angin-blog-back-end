@@ -98,7 +98,7 @@ const AuthController = {
             token = token.split(" ")[1];
             const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-            if (!decoded) return res.status(400).json({ message: 'Link verifikasi email atau token yang anda minta tidak valid. Pastikan link atau token tersebut tidak typo!' });
+            if (!decoded) return res.status(400).json({ message: 'Link atau token verifikasi email yang anda minta tidak valid. Pastikan tidak typo atau silahkan lakukan pengajuan ulang!' });
 
             await db.sequelize.transaction(async (t) => {
                 const updateUser = await users.update(
@@ -111,7 +111,7 @@ const AuthController = {
 
         } catch (err) {
             return res.status(503).json({
-                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
+                message: 'Link atau token verifikasi email anda telah kadaluarsa. Silahkan lakukan pengajuan ulang!',
                 error: err.message
             });
         }
