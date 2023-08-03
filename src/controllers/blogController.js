@@ -1,5 +1,5 @@
 const db = require('../models');
-const blog = db.blog;
+const blog = db.Blog;
 const category = db.blogCategory;
 // const { where } = require('sequelize');
 const { Op } = db.Sequelize;
@@ -77,5 +77,5 @@ const BlogController = {
         }
     }
 };
-blog.sync({alter: true})
+// blog.sync({alter: true})
 module.exports = BlogController;
