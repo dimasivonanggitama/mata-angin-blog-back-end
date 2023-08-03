@@ -8,5 +8,4 @@ const { tokenVerificator } = require("../middleware");
 // router.post("/posts", authController.login);
 // router.post("/remove", authController.login);
 router.post("/create", tokenVerificator, blogController.createBlog);
-
 module.exports = router;
