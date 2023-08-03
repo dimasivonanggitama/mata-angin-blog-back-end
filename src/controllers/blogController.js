@@ -49,7 +49,6 @@ const BlogController = {
             res.status(500).json({ message: "Gagal membuat blog", error: error.message });
         }
     },
-
     getBlog: async (req, res) => {
         const { title, category_id, orderBy, size, page } = req.query;
         const limitPerPage = parseInt(size) || 10;
