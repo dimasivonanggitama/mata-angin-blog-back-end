@@ -39,5 +39,10 @@ module.exports = (sequelize, Sequelize) => {
     }, {
         timestamps: false,
     });
+
+    Blog.associate = models => {
+        Blog.belongsTo(models.User, {foreignKey: "user_id"});
+    }
+
     return Blog;
 }
