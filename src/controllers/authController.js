@@ -57,26 +57,38 @@ const AuthController = {
     },
     login: async (req, res) => {
         try {
-            const { email, password } = req.body;
-            const isEmailExist = await User.findOne({ where: { email }, raw: true });
-            if (!isEmailExist) {
-                return res.status(401).json ({
-                    message: "Email yang anda masukkan salah!"
-                });
+            const { email, username, phone, password } = req.body;
+            let where = {};
+            if (email) { where.email = email; }
+            if (username) { where.username = username; }
+            if (phone) { where.phone = phone; }
+
+            const checkLogin = await users.findOne({ where });
+            if (!checkLogin.isVerified) return res.status(404).json({ message: "Please verify your email" });
+
+            const passwordValid = await bcrypt.compare(password, checkLogin.password);
+            if (!passwordValid) return res.status(404).json({ message: "Password incorrect"});
+
+            let payload = {
+                id: checkLogin.id,
+                username: checkLogin.username,
+                email: checkLogin.email,
+                phone: checkLogin.phone,
             }
-            const isValid = await bcrypt.compare(password, isEmailExist.password);
-            if (!isValid) {
-                return res.status(401).json({
-                    message: "Email atau Password yang anda masukkan salah!"
-                })
-            }
+
+            const token = jwt.sign(
+                payload,
+                process.env.JWT_KEY, { expiresIn: '100h'}
+            )
+
             return res.status(200).json({
-                message: "Login berhasil"
-            });
-        } catch (err) {
-            return res.status(503).json({
-                message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
-                error: err.message
+                message: "Login success",
+                data: token
+            })
+        } catch (error) {
+            return res.status(500).json({
+              message: "Login failed",
+              error: error.message,
             });
         }
     },
