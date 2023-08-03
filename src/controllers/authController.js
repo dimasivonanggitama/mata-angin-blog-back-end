@@ -162,7 +162,7 @@ const AuthController = {
             await db.sequelize.transaction(async (t) => {
                 const updateUser = await user.update(
                     { isVerified: true },
-                    { where: { id: decoded.id } }, { transaction: t }
+                    { where: { user_id: decoded.id } }, { transaction: t }
                 );
             })
 
