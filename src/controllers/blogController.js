@@ -10,15 +10,15 @@ const BlogController = {
 
         try {
             const blog = await blog.findOne({
-                attributes: { exclude: ['categoryId'] },
+                attributes: { exclude: ['category_id'] },
                 where: { id },
                 include: [{ model: db.category }]
             });
             if (!blog) return res.status(404).json('Data not found');
 
-            res.status(200).json({ message: 'Get blog data successfully', data: blog});
+            res.status(200).json({ message: 'Data blog berhasil diambil', data: blog});
         } catch (error) {
-            res.status(500).json({ message: 'Failed to get blog data'});
+            res.status(500).json({ message: 'Gagal mengambil data blog. Silahkan coba kembali nanti'});
         }
     },
     createBlog: async (req, res) => {
@@ -26,42 +26,41 @@ const BlogController = {
             const {
                 title,
                 content,
-                imgBlog,
-                videoUrl,
-                keywords,
-                categoryId,
-                countryId
+                image,
+                video,
+                keyword_id,
+                category_id,
+                country_id
             } = req.body;
-            // if(content.length > 500) return res.status(500).json({ message: "Maximum 500 char" });
             await db.sequelize.transaction(async (t) => {
                 const result = await blog.create({
                     title,
                     content,
-                    imgBlog: req.file.path,
-                    videoUrl,
-                    keywords,
-                    categoryId,
-                    countryId,
-                    userId: req.user.id
+                    image: req.file.path,
+                    video,
+                    keyword_id,
+                    category_id,
+                    country_id,
+                    user_id: req.user.id
                 }, { transaction: t })
-                res.status(500).json({ message: 'Blog is created successfully', data: result});
+                res.status(200).json({ message: 'Blog berhasil dibuat', data: result});
             });
         } catch (error) {
-            res.status(500).json({ message: "Failed to create blog", error: error.message });
+            res.status(500).json({ message: "Gagal membuat blog", error: error.message });
         }
     },
 
     getBlog: async (req, res) => {
-        const { title, categoryId, orderBy, size, page } = req.query;
+        const { title, category_id, orderBy, size, page } = req.query;
         const limitPerPage = parseInt(size) || 10;
         const pageNumber = parseInt(page) || 1;
         const offset = (pageNumber - 1) * limitPerPage;
         const findTitle = {title: { [ Op.like ]: `%${title || ""}%` }}
-        if (categoryId) findTitle.categoryId = categoryId;
+        if (category_id) findTitle.category_id = category_id;
 
         try {
             const blogs = await blog.findAll({
-                attributes: { exclude: ["categoryId"] },
+                attributes: { exclude: ["category_id"] },
                 where: findTitle,
                 limit: limitPerPage,
                 blogPage: pageNumber,
@@ -70,7 +69,7 @@ const BlogController = {
                 order: [["createdAt", orderBy || "ASC"]],
             });
 
-            res.status(200).json({ message: 'Get blog data successfully', listLimit: limitPerPage, blogPage: pageNumber, data: blogs });
+            res.status(200).json({ message: 'Data blog berhasil diambil', listLimit: limitPerPage, blogPage: pageNumber, data: blogs });
 
         } catch (error) {
             res.status(500).json({ message: 'Failed to get blog data'});
