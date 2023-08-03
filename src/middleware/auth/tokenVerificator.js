@@ -4,7 +4,7 @@ require('dotenv').config({
     path: path.resolve('../.env')
 });
 
-const verifyToken = (req, res, next) => {
+const tokenVerificator = (req, res, next) => {
     let token = req.headers.authorization;
     if (!token) return res.status(401).send("Anda harus login terlebih dahulu!");
 
@@ -23,4 +23,4 @@ const verifyToken = (req, res, next) => {
     }
 }
 
-module.exports = { verifyToken };
+module.exports = { tokenVerificator };
