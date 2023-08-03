@@ -16,11 +16,11 @@ const AuthController = {
             if (username) { where.username = username; }
             if (phone) { where.phone = phone; }
 
-            const checkLogin = await users.findOne({ where });
+            const checkLogin = await user.findOne({ where });
             if (!checkLogin.isVerified) return res.status(403).json({ message: "Untuk alasan keamanan, anda harus verifikasi email terlebih dahulu!" });
 
             const passwordValid = await bcrypt.compare(password, checkLogin.password);
-            if (!passwordValid) return res.status(422).json({ message: "Password incorrect"});
+            if (!passwordValid) return res.status(422).json({ message: "Password yang anda masukkan salah!"});
 
             let payload = {
                 id: checkLogin.id,
@@ -94,7 +94,7 @@ const AuthController = {
     },
     resendToken: async (req, res) => {
         try {
-
+            
         } catch (err) {
 
         }
