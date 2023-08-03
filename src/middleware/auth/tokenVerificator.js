@@ -19,7 +19,7 @@ const tokenVerificator = (req, res, next) => {
         req.user = verifiedUser;
         next();
     } catch (error) {
-        return res.status(400).send("Token Expired");
+        return res.status(403).send("Mohon maaf, waktu login anda sudah habis. Silahkan login kembali.");
     }
 }
 
