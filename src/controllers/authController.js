@@ -85,7 +85,7 @@ const AuthController = {
                 message: "Login success",
                 data: token
             })
-        } catch (error) {
+        } catch (err) {
             return res.status(503).json({
                 message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
                 error: err.message
@@ -109,7 +109,7 @@ const AuthController = {
 
             return res.status(200).json({ message: 'Email anda berhasil diverfikasi. Silahkan lakukan login kembali.' });
 
-        } catch (error) {
+        } catch (err) {
             return res.status(503).json({
                 message: 'Mohon maaf, layanan tidak tersedia saat ini. Silakan coba lagi nanti.',
                 error: err.message
