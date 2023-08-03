@@ -92,11 +92,63 @@ const AuthController = {
             });
         }
     },
-    resendToken: async (req, res) => {
+    resendRegisterToken: async (req, res) => {
         try {
-            
-        } catch (err) {
+            const { username, email, phone } = req.body;
+            let resultID, resultEmail, resultUsername = "";
 
+            if (email) {
+                const emailExist = await user.findOne({
+                    where: { email: email },
+                });
+                resultEmail = emailExist.email;
+                resultID = emailExist.user_id;
+                resultUsername = emailExist.username;
+            } else if (username) {
+                const usernameExist = await user.findOne({
+                    where: { username: username },
+                });
+                resultEmail = usernameExist.email;
+                resultID = usernameExist.user_id;
+                resultUsername = username;
+            } else if (phone) {   //834567899
+                const phoneExist = await user.findOne({
+                    where: { phone: phone },
+                });
+                resultEmail = phoneExist.email;
+                resultID = phoneExist.user_id;
+                resultUsername = phoneExist.username;
+            }
+            
+            let payload = { id: resultID, email: resultEmail };
+
+            const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '1h' });
+
+            const redirect = `http://localhost:3000/verification/${token}`;
+
+            const data = await fs.readFile(
+                path.resolve(__dirname, "../email/verificationEmail.html"), 'utf-8'
+            );
+
+            const tempCompile = handlebars.compile(data);
+            const tempResult = tempCompile({ resultUsername, redirect });
+
+            await transporter.sendMail({
+                to: resultEmail,
+                subject: "Verify Account",
+                html: tempResult
+            });
+
+            return res.status(200).json({
+                message: 'Permintaan anda telah diterima. Silahkan periksa email anda untuk melakukan verifikasi akun.',
+                data: {"user_id": resultID, "email": resultEmail, "username": resultUsername},
+                token
+            });
+        } catch (err) {
+            return res.status(503).json({
+                message: 'Link atau token verifikasi email anda telah kadaluarsa. Silahkan lakukan pengajuan ulang!',
+                error: err.message
+            });
         }
     },
     verifyEmail: async (req, res) => {
@@ -108,7 +160,7 @@ const AuthController = {
             if (!decoded) return res.status(400).json({ message: 'Link atau token verifikasi email yang anda minta tidak valid. Pastikan tidak typo atau silahkan lakukan pengajuan ulang!' });
 
             await db.sequelize.transaction(async (t) => {
-                const updateUser = await users.update(
+                const updateUser = await user.update(
                     { isVerified: true },
                     { where: { id: decoded.id } }, { transaction: t }
                 );
