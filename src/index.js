@@ -15,10 +15,7 @@ const { blogRoutes } = require("./routes");
 app.use(express.json());
 
 // app.use("/branch-management", authRoutes);
-app.use("/api/auth", authRoutes);                         // [POST] Register Account
-// app.use("/api/auth/verify", authRoutes);                  // [PATCH] Verify Account
-// app.use("/api/auth/login", authRoutes);                   // [POST] Login
-                                                            // [GET] Keep Login
+app.use("/api/auth", authRoutes);
 // app.use("/api/auth/forgotPass", authRoutes);              // [PUT] Forgot Password
 // app.use("/api/auth/resetPass", authRoutes);
 // app.use("/api/auth/changeUsername", authRoutes);
