@@ -98,7 +98,7 @@ const AuthController = {
             token = token.split(" ")[1];
             const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-            if (!decoded) return res.status(400).json({ message: 'Invalid token' });
+            if (!decoded) return res.status(400).json({ message: 'Link verifikasi email atau token yang anda minta tidak valid. Pastikan link atau token tersebut tidak typo!' });
 
             await db.sequelize.transaction(async (t) => {
                 const updateUser = await users.update(
@@ -107,7 +107,7 @@ const AuthController = {
                 );
             })
 
-            return res.status(200).json({ message: 'Email is verified successfully' });
+            return res.status(200).json({ message: 'Email anda berhasil diverfikasi. Silahkan lakukan login kembali.' });
 
         } catch (error) {
             return res.status(503).json({
